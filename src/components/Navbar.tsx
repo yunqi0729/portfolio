@@ -1,7 +1,12 @@
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import logoLight from '../assets/yunqi_logo_light.png';
+import logoDark from '../assets/yunqi_logo_dark.png';
 import closeLight from '../assets/close-black.png';
+import closeDark from '../assets/close-white.png';
 import menuLight from '../assets/menu-black.png';
+import menuDark from '../assets/menu-white.png';
+import sun from '../assets/sun_icon.png';
+import moon from '../assets/moon_icon.png';
 import { Link } from 'react-scroll';
 import type { RootState } from '../store';
 import { useSelector } from 'react-redux';
@@ -9,6 +14,8 @@ import { useSelector } from 'react-redux';
 export default function NavBar() {
     const constantsColour = useSelector((state: RootState) => state.constants);
     const sideMenuRef = useRef<HTMLUListElement>(null);
+    const navRef = useRef<HTMLDivElement>(null);
+    const navLinkRef = useRef<HTMLUListElement>(null);
 
     const navItems = [
         { id: 1, name: "Home", url: "header" },
@@ -36,6 +43,16 @@ export default function NavBar() {
         }
     }
 
+    const toggleTheme = () => {
+        document.documentElement.classList.toggle('dark');
+
+        if (document.documentElement.classList.contains('dark')) {
+            localStorage.theme = 'dark';
+        } else {
+            localStorage.theme = 'light';
+        }
+    }
+
     const menu = (shouldCloseMenu: boolean = false) => navItems.map((item) => (
         <li key={item.id}>
             <Link
@@ -53,40 +70,65 @@ export default function NavBar() {
                     color: "white",
                     borderRadius: "10px",
                 }}
-                className={`px-5 py-3 mx-1 cursor-pointer`}
+                className={`px-5 py-3 mx-1 cursor-pointer text-[#122448] hover:text-[#7B93C0] dark:text-[#9C562F] dark:hover:text-[#D3B694]`}
             >
                 {item.name}
             </Link>
         </li>
     ));
 
+    useEffect(() => {
+        window.addEventListener('scroll', () => {
+            if (scrollY > 50) {
+                navRef.current?.classList.add('bg-white', 'bg-opacity-50', 'backdrop-blur-lg', 'shadow-sm', 'dark:bg-darkTheme', 'dark:shadow-white/20');
+                navLinkRef.current?.classList.remove('bg-white', 'shadow-sm', 'bg-opacity-50', 'dark:border', 'dark:border-white/30', "dark:bg-transparent");
+            } else {
+                navRef.current?.classList.remove('bg-white', 'bg-opacity-50', 'backdrop-blur-lg', 'shadow-sm', 'dark:bg-darkTheme', 'dark:shadow-white/20');
+                navLinkRef.current?.classList.add('bg-white', 'shadow-sm', 'bg-opacity-50', 'dark:border', 'dark:border-white/30', "dark:bg-transparent");
+            }
+        })
+
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    }, [])
+
     return (
-        <div className="sticky top-0 bg-white border-white z-50 transition-all duration-1000">
+        <div ref={navRef}
+            className="sticky top-0 z-50 transition-all duration-1000 bg-white border-white dark:bg-black dark:border-black"
+        >
             <div className="navbar flex justify-between mx-auto content h-14 items-center px-4">
                 <div className="flex items-center">
                     <Link href="#header" to={`header`} smooth={true} duration={1000} offset={-56}
                         className="flex items-center border-0 sm:max-xxl:ps-5 mx-5">
-                        <img src={logoLight}
-                            className="h-14 sm:h-14 w-auto"
-                            alt="logo" />
+                        <img src={logoLight} className="h-14 sm:h-14 w-auto dark:hidden" alt="logo" />
+                        <img src={logoDark} className="h-14 sm:h-14 w-auto hidden dark:block" alt="logo" />
                     </Link>
                 </div>
                 <div className="flex items-center">
+                    <div className="flex items-center h-full">
+                        <button onClick={toggleTheme}>
+                            <img src={moon} className="w-5 cursor-pointer h-auto mr-2 dark:hidden" alt="colorTheme" />
+                            <img src={sun} className="w-5 cursor-pointer h-auto mr-2 hidden dark:block" alt="colorTheme" />
+                        </button>
+                    </div>
                     <ul className="hidden lg:flex menu menu-horizontal text-[16px] font-medium md:shrink-0">
                         {menu(false)}
                     </ul>
                     <div className="flex items-center h-full">
                         <button className="block lg:hidden ml-3 focus:outline-none flex items-center justify-center" onClick={openMenu}>
-                            {/* <img src="./assets/menu-black.png" alt="" className="w-6 dark:hidden" />
-                            <img src="./assets/menu-white.png" alt="" className="w-6 hidden dark:block" /> */}
-                            <img src={menuLight} className="w-6 h-auto" alt="menu" />
+                            <img src={menuLight} className="w-6 cursor-pointer h-auto dark:hidden" alt="menu" />
+                            <img src={menuDark} className="w-6 cursor-pointer h-auto hidden dark:block" alt="menu" />
                         </button>
                     </div>
-                    <ul ref={sideMenuRef} className="flex lg:hidden flex-col gap-4 py-15 px-5 fixed -right-64 top-0 bottom-0 w-50 z-50 h-screen bg-[#CFD3DC] transition duration-500 font-Ovo dark:bg-darkHover dark:text-black">
+                    <ul ref={sideMenuRef}
+                        className="flex lg:hidden flex-col gap-4 py-15 px-5 fixed -right-64 top-0 bottom-0 w-64 z-50 h-screen bg-[#CFD3DC] transition duration-500 font-Ovo dark:bg-black dark:text-white"
+                    >
                         <div className="absolute right-5 top-5 flex items-center justify-center" onClick={closeMenu}>
-                            {/* <img src="./assets/close-black.png" alt="" className="w-5 cursor-pointer dark:hidden" />
-                            <img src="./assets/close-white.png" alt="" className="w-5 cursor-pointer hidden dark:block" /> */}
-                            <img src={closeLight} className="w-5 cursor-pointer" alt="close" />
+                            <img src={closeLight} className="w-5 cursor-pointer dark:hidden" alt="close" />
+                            <img src={closeDark} className="w-5 cursor-pointer hidden dark:block" alt="close" />
                         </div>
                         {menu(true)}
                     </ul>
