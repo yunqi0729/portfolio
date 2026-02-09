@@ -1,10 +1,21 @@
-import { format } from "date-fns"
+import Navbar from './components/Navbar'
+import Header from './components/Header'
+import About from './components/About'
+import Education from './components/Education'
+import Experiences from './components/Experiences'
+import Projects from './components/Projects'
+import Contact from './components/Contact'
 
 function App() {
   return (
     <>
-      <h1 className="text-2xl text-gray-700 m-4 font-bold">Welcome to my portfolio!</h1>
-      <p className="text-sm text-gray-400 m-4">Today's Date: {format(new Date(), "dd/MM/yyyy")}</p>
+      <Navbar />
+      <Header />
+      <About />
+      <Education />
+      <Experiences />
+      <Projects />
+      <Contact />
     </>
   )
 }
