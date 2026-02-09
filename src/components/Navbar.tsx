@@ -7,7 +7,6 @@ import type { RootState } from '../store';
 import { useSelector } from 'react-redux';
 
 export default function NavBar() {
-    const [position, setPosition] = useState(0);
     const constantsColour = useSelector((state: RootState) => state.constants);
     const sideMenuRef = useRef<HTMLUListElement>(null);
 
@@ -60,16 +59,6 @@ export default function NavBar() {
             </Link>
         </li>
     ));
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setPosition(window.scrollY);
-        };
-        window.addEventListener("scroll", handleScroll);
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
 
     return (
         <div className="sticky top-0 bg-white border-white z-50 transition-all duration-1000">
