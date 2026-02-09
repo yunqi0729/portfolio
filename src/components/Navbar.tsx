@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
 import logoLight from '../assets/yunqi_logo_light.png';
 import closeLight from '../assets/close-black.png';
 import menuLight from '../assets/menu-black.png';
