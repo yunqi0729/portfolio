@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import logoLight from '../assets/yunqi_logo_light.png';
 import logoDark from '../assets/yunqi_logo_dark.png';
 import closeLight from '../assets/close-black.png';
@@ -16,6 +16,7 @@ export default function NavBar() {
     const sideMenuRef = useRef<HTMLUListElement>(null);
     const navRef = useRef<HTMLDivElement>(null);
     const navLinkRef = useRef<HTMLUListElement>(null);
+    const [isDarkMode, setIsDarkMode] = useState(false);
 
     const navItems = [
         { id: 1, name: "Home", url: "header" },
@@ -44,38 +45,43 @@ export default function NavBar() {
     }
 
     const toggleTheme = () => {
-        document.documentElement.classList.toggle('dark');
+        const isDark = document.documentElement.classList.toggle('dark');
+        setIsDarkMode(isDark);
 
-        if (document.documentElement.classList.contains('dark')) {
+        if (isDark) {
             localStorage.theme = 'dark';
         } else {
             localStorage.theme = 'light';
         }
     }
 
-    const menu = (shouldCloseMenu: boolean = false) => navItems.map((item) => (
-        <li key={item.id}>
-            <Link
-                onClick={() => {
-                    handleMenuClick();
-                    if (shouldCloseMenu) closeMenu();
-                }}
-                to={item.url.toLowerCase()}
-                smooth={true}
-                duration={1000}
-                spy={true}
-                offset={-56}
-                activeStyle={{
-                    backgroundColor: constantsColour.primaryColourLight,
-                    color: "white",
-                    borderRadius: "10px",
-                }}
-                className={`px-5 py-3 mx-1 cursor-pointer text-[#122448] hover:text-[#7B93C0] dark:text-[#9C562F] dark:hover:text-[#D3B694]`}
-            >
-                {item.name}
-            </Link>
-        </li>
-    ));
+    const menu = (shouldCloseMenu: boolean = false) => {
+        return navItems.map((item) => (
+            <li key={item.id}>
+                <Link
+                    onClick={() => {
+                        handleMenuClick();
+                        if (shouldCloseMenu) closeMenu();
+                    }}
+                    to={item.url.toLowerCase()}
+                    smooth={true}
+                    duration={1000}
+                    spy={true}
+                    offset={-56}
+                    activeStyle={{
+                        backgroundColor: isDarkMode
+                            ? constantsColour.primaryColourDark
+                            : constantsColour.primaryColourLight,
+                        color: "white",
+                        borderRadius: "10px",
+                    }}
+                    className={`px-5 py-3 mx-1 cursor-pointer text-[16px] font-medium text-[#122448] hover:text-[#7B93C0] dark:text-[#9C562F] dark:hover:text-[#D3B694]`}
+                >
+                    {item.name}
+                </Link>
+            </li>
+        ));
+    };
 
     useEffect(() => {
         window.addEventListener('scroll', () => {
@@ -88,17 +94,19 @@ export default function NavBar() {
             }
         })
 
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark')
+        const initialDark = localStorage.theme === 'dark' ||
+            (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+        setIsDarkMode(initialDark);
+        if (initialDark) {
+            document.documentElement.classList.add('dark');
         } else {
-            document.documentElement.classList.remove('dark')
+            document.documentElement.classList.remove('dark');
         }
     }, [])
 
     return (
-        <div ref={navRef}
-            className="sticky top-0 z-50 transition-all duration-1000 bg-white border-white dark:bg-black dark:border-black"
-        >
+        <div ref={navRef} className="sticky top-0 z-50 transition-all duration-1000 bg-white border-white dark:bg-black dark:border-black">
             <div className="navbar flex justify-between mx-auto content h-14 items-center px-4">
                 <div className="flex items-center">
                     <Link href="#header" to={`header`} smooth={true} duration={1000} offset={-56}
@@ -114,7 +122,7 @@ export default function NavBar() {
                             <img src={sun} className="w-5 cursor-pointer h-auto mr-2 hidden dark:block" alt="colorTheme" />
                         </button>
                     </div>
-                    <ul className="hidden lg:flex menu menu-horizontal text-[16px] font-medium md:shrink-0">
+                    <ul className="hidden lg:flex menu menu-horizontal md:shrink-0">
                         {menu(false)}
                     </ul>
                     <div className="flex items-center h-full">
@@ -123,9 +131,7 @@ export default function NavBar() {
                             <img src={menuDark} className="w-6 cursor-pointer h-auto hidden dark:block" alt="menu" />
                         </button>
                     </div>
-                    <ul ref={sideMenuRef}
-                        className="flex lg:hidden flex-col gap-4 py-15 px-5 fixed -right-64 top-0 bottom-0 w-64 z-50 h-screen bg-[#CFD3DC] transition duration-500 font-Ovo dark:bg-black dark:text-white"
-                    >
+                    <ul ref={sideMenuRef} className="flex lg:hidden flex-col gap-4 py-15 px-5 fixed -right-64 top-0 bottom-0 w-64 z-50 h-screen transition duration-500 bg-[#ECEFF7] dark:bg-[#2D2927]">
                         <div className="absolute right-5 top-5 flex items-center justify-center" onClick={closeMenu}>
                             <img src={closeLight} className="w-5 cursor-pointer dark:hidden" alt="close" />
                             <img src={closeDark} className="w-5 cursor-pointer hidden dark:block" alt="close" />
