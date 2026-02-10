@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import logoLight from '../assets/yunqi_logo_light.png';
 import logoDark from '../assets/yunqi_logo_dark.png';
 import closeLight from '../assets/close-black.png';
@@ -9,14 +9,16 @@ import sun from '../assets/sun_icon.png';
 import moon from '../assets/moon_icon.png';
 import { Link } from 'react-scroll';
 import type { RootState } from '../store';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateDarkMode } from '../modeSlice';
 
 export default function NavBar() {
     const constantsColour = useSelector((state: RootState) => state.constants);
     const sideMenuRef = useRef<HTMLUListElement>(null);
     const navRef = useRef<HTMLDivElement>(null);
     const navLinkRef = useRef<HTMLUListElement>(null);
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const isDarkMode = useSelector((state: RootState) => state.mode.isDarkMode);
+    const dispatch = useDispatch();
 
     const navItems = [
         { id: 1, name: "Home", url: "header" },
@@ -45,15 +47,31 @@ export default function NavBar() {
     }
 
     const toggleTheme = () => {
-        const isDark = document.documentElement.classList.toggle('dark');
-        setIsDarkMode(isDark);
+        dispatch(updateDarkMode());
 
-        if (isDark) {
-            localStorage.theme = 'dark';
-        } else {
-            localStorage.theme = 'light';
-        }
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.theme = isDark ? 'dark' : 'light';
     }
+
+    useEffect(() => {
+        window.addEventListener('scroll', () => {
+            if (scrollY > 50) {
+                navRef.current?.classList.add('bg-white', 'bg-opacity-50', 'backdrop-blur-lg', 'shadow-sm', 'dark:bg-darkTheme', 'dark:shadow-white/20');
+                navLinkRef.current?.classList.remove('bg-white', 'shadow-sm', 'bg-opacity-50', 'dark:border', 'dark:border-white/30', "dark:bg-transparent");
+            } else {
+                navRef.current?.classList.remove('bg-white', 'bg-opacity-50', 'backdrop-blur-lg', 'shadow-sm', 'dark:bg-darkTheme', 'dark:shadow-white/20');
+                navLinkRef.current?.classList.add('bg-white', 'shadow-sm', 'bg-opacity-50', 'dark:border', 'dark:border-white/30', "dark:bg-transparent");
+            }
+        })
+
+        const savedTheme = localStorage.theme;
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    }, [dispatch])
 
     const menu = (shouldCloseMenu: boolean = false) => {
         return navItems.map((item) => (
@@ -82,28 +100,6 @@ export default function NavBar() {
             </li>
         ));
     };
-
-    useEffect(() => {
-        window.addEventListener('scroll', () => {
-            if (scrollY > 50) {
-                navRef.current?.classList.add('bg-white', 'bg-opacity-50', 'backdrop-blur-lg', 'shadow-sm', 'dark:bg-darkTheme', 'dark:shadow-white/20');
-                navLinkRef.current?.classList.remove('bg-white', 'shadow-sm', 'bg-opacity-50', 'dark:border', 'dark:border-white/30', "dark:bg-transparent");
-            } else {
-                navRef.current?.classList.remove('bg-white', 'bg-opacity-50', 'backdrop-blur-lg', 'shadow-sm', 'dark:bg-darkTheme', 'dark:shadow-white/20');
-                navLinkRef.current?.classList.add('bg-white', 'shadow-sm', 'bg-opacity-50', 'dark:border', 'dark:border-white/30', "dark:bg-transparent");
-            }
-        })
-
-        const initialDark = localStorage.theme === 'dark' ||
-            (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
-
-        setIsDarkMode(initialDark);
-        if (initialDark) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-    }, [])
 
     return (
         <div ref={navRef} className="sticky top-0 z-50 transition-all duration-1000 bg-white border-white dark:bg-black dark:border-black">

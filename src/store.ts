@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import constantsReducer from './constantsSlice';
+import modeReducer from './modeSlice';
 
 const store = configureStore({
     reducer: {
         constants: constantsReducer,
+        mode: modeReducer,
     },
 })
 
