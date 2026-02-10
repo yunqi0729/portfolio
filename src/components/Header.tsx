@@ -8,7 +8,7 @@ export default function Header() {
     const isDarkMode = useSelector((state: RootState) => state.mode.isDarkMode);
 
     return (
-        <div id="header" className={`relative w-full h-[91vh] min-h-[400px] flex items-end justify-center overflow-hidden transition-colors duration-500 ${isDarkMode ? 'bg-black' : 'bg-white'}`}>
+        <div id="header" className={`relative w-full h-[91vh] min-h-[300px] flex items-end justify-center overflow-hidden transition-colors duration-500 ${isDarkMode ? 'bg-black' : 'bg-white'}`}>
             <img className="absolute inset-0 w-full h-full object-cover z-0" src={mountainBackground} alt="mountain background" />
             <div className="relative z-10 container mx-auto px-6 gap-5 flex flex-col sm:flex-row items-center sm:items-end justify-center ">
                 <div className="relative w-82 h-82 sm:w-106 sm:h-106 lg:w-[490px] lg:h-[490px]">
