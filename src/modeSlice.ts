@@ -4,8 +4,15 @@ interface mode {
     isDarkMode: boolean;
 }
 
+const getInitialTheme = (): boolean => {
+    if (typeof window !== 'undefined' && localStorage.theme) {
+        return localStorage.theme === 'dark';
+    }
+    return typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches;
+};
+
 const initialState: mode = {
-    isDarkMode: false,
+    isDarkMode: getInitialTheme(),
 }
 
 export const ModeSlice = createSlice({

@@ -16,7 +16,6 @@ export default function NavBar() {
     const constantsColour = useSelector((state: RootState) => state.constants);
     const sideMenuRef = useRef<HTMLUListElement>(null);
     const navRef = useRef<HTMLDivElement>(null);
-    const navLinkRef = useRef<HTMLUListElement>(null);
     const isDarkMode = useSelector((state: RootState) => state.mode.isDarkMode);
     const dispatch = useDispatch();
 
@@ -54,24 +53,21 @@ export default function NavBar() {
     }
 
     useEffect(() => {
-        window.addEventListener('scroll', () => {
-            if (scrollY > 50) {
-                navRef.current?.classList.add('bg-white', 'bg-opacity-50', 'backdrop-blur-lg', 'shadow-sm', 'dark:bg-darkTheme', 'dark:shadow-white/20');
-                navLinkRef.current?.classList.remove('bg-white', 'shadow-sm', 'bg-opacity-50', 'dark:border', 'dark:border-white/30', "dark:bg-transparent");
+        const handleScroll = () => {
+            if (window.scrollY > 50) {
+                navRef.current?.classList.add('backdrop-blur-lg', 'shadow-sm');
             } else {
-                navRef.current?.classList.remove('bg-white', 'bg-opacity-50', 'backdrop-blur-lg', 'shadow-sm', 'dark:bg-darkTheme', 'dark:shadow-white/20');
-                navLinkRef.current?.classList.add('bg-white', 'shadow-sm', 'bg-opacity-50', 'dark:border', 'dark:border-white/30', "dark:bg-transparent");
+                navRef.current?.classList.remove('backdrop-blur-lg', 'shadow-sm');
             }
-        })
-
-        const savedTheme = localStorage.theme;
-        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+        };
+        window.addEventListener('scroll', handleScroll);
+        if (isDarkMode) {
             document.documentElement.classList.add('dark');
         } else {
             document.documentElement.classList.remove('dark');
         }
-    }, [dispatch])
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [isDarkMode]);
 
     const menu = (shouldCloseMenu: boolean = false) => {
         return navItems.map((item) => (
@@ -102,7 +98,7 @@ export default function NavBar() {
     };
 
     return (
-        <div ref={navRef} className="sticky top-0 z-50 transition-all duration-1000 bg-white border-white dark:bg-black dark:border-black">
+        <div ref={navRef} className="sticky top-0 z-50 transition-all duration-500 bg-white dark:bg-black border-none">
             <div className="navbar flex justify-between mx-auto content h-14 items-center px-4">
                 <div className="flex items-center">
                     <Link href="#header" to={`header`} smooth={true} duration={1000} offset={-56}
