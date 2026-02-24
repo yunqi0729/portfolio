@@ -32,14 +32,14 @@ export default function About() {
                             A dedicated <span className={`font-bold ${isDarkMode ? 'text-[#3F4E79]' : 'text-[#9C562F]'}`}>Software Engineer</span> with a deep passion for the transformative power of code. I am fascinated by the ability to build complex modules and entire digital worlds from a few lines of logic.
                         </p>
                         <div className="space-y-3 overflow-hidden -mx-6 sm:-mx-12">
-                            <Marquee pauseOnHover={true} speed={50} direction="right" gradient={false}>
+                            <Marquee pauseOnHover={true} speed={50} direction="left" gradient={false}>
                                 {techSkills.map((skill, index) => (
                                     <span key={index} className="mx-1.5 px-4 py-2 rounded-lg text-sm sm:text-base font-medium whitespace-nowrap inline-block bg-[#122448] text-white hover:bg-[#3F4E79] dark:bg-[#9C562F] dark:hover:bg-[#C37448]">
                                         {skill}
                                     </span>
                                 ))}
                             </Marquee>
-                            <Marquee pauseOnHover={true} speed={50} direction="left" gradient={false}>
+                            <Marquee pauseOnHover={true} speed={50} direction="right" gradient={false}>
                                 {othersSkills.map((skill, index) => (
                                     <span key={index} className="mx-1.5 px-4 py-2 rounded-lg text-sm sm:text-base font-medium whitespace-nowrap inline-block bg-[#122448] text-white hover:bg-[#3F4E79] dark:bg-[#9C562F] dark:hover:bg-[#C37448]">
                                         {skill}
