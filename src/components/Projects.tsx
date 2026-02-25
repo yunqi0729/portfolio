@@ -3,7 +3,7 @@ import type { RootState } from '../store';
 import { useNavigate } from 'react-router-dom';
 import tuitionifyMain from '../assets/tuitionify_photos/tuitionify_main.png';
 import vcareMain from '../assets/vcare_photos/vcare_main.png';
-import zoomaths from '../assets/hand-icon.png';
+import zoomathsMain from '../assets/zoomaths_photos/zoomaths_main.png';
 
 interface ProjectCard {
     image: string;
@@ -44,7 +44,7 @@ export default function Projects() {
             route: "/projects/vcare"
         },
         {
-            image: zoomaths,
+            image: zoomathsMain,
             title: "<i>Zoo! Maths</i>, Mathematics Mobile Application for School-Going Children",
             subtitle: "Mobile Applications Development Assignment",
             date: "January 2025",
