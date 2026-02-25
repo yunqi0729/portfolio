@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 import type { RootState } from '../store';
 import { useNavigate } from 'react-router-dom';
-import tuitionify from '../assets/hand-icon.png';
-import vcare from '../assets/hand-icon.png';
+import tuitionify from '../assets/mountain_background.jpg';
+import vcare from '../assets/fict_utar.jpg';
 import zoomaths from '../assets/hand-icon.png';
 
 interface ProjectCard {
@@ -74,8 +74,8 @@ export default function Projects() {
             <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
                 {projectsData.map((project, index) => (
                     <div className={`rounded-2xl overflow-hidden shadow-xl transition-transform duration-300 hover:scale-105 cursor-pointer flex flex-col ${isDarkMode ? 'bg-[#FAE2C5]' : 'bg-white'}`} key={index} onClick={() => handleProjectClick(project.route)}>
-                        <div className="w-full h-60 sm:h-70 overflow-hidden">
-                            <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
+                        <div className="relative w-full overflow-hidden shadow-md bg-white dark:bg-black" style={{ paddingBottom: '56.25%' }}>
+                            <img className="absolute top-0 left-0 w-full h-full object-contain" src={project.image} alt={project.title} />
                         </div>
                         <div className="px-6 pb-5 pt-3 flex-grow flex flex-col">
                             <div className="flex-grow">
