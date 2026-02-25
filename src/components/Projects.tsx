@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import type { RootState } from '../store';
 import { useNavigate } from 'react-router-dom';
+import yunqiMain from '../assets/yunqi_photos/yunqi_home.png';
 import tuitionifyMain from '../assets/tuitionify_photos/tuitionify_main.png';
 import vcareMain from '../assets/vcare_photos/vcare_main.png';
 import zoomathsMain from '../assets/zoomaths_photos/zoomaths_main.png';
@@ -19,14 +20,14 @@ export default function Projects() {
     const navigate = useNavigate();
 
     const projectsData: ProjectCard[] = [
-        // {
-        //     image: yunqiPortfolio,
-        //     title: "yunqi., Personal Development Portfolio Website",
-        //     subtitle: "",
-        //     date: "Jan 2026",
-        //     stack: "React",
-        //     route: "/projects/yunqi"
-        // },
+        {
+            image: yunqiMain,
+            title: "<i>yunqi.</i>, Personal Development Portfolio Website",
+            subtitle: "",
+            date: "February 2026",
+            stack: "React, TypeScript, Tailwind CSS, Vite",
+            route: "/projects/yunqi"
+        },
         {
             image: tuitionifyMain,
             title: "<i>Tuitionify</i>, Smart Management System for Tuition Centre Operations",

@@ -10,6 +10,7 @@ import Experiences from './components/Experiences';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import YunqiProject from './components/ProjectPages/Yunqi';
 import TuitionifyProject from './components/ProjectPages/Tuitionify';
 import VCareProject from './components/ProjectPages/VCare';
 import ZooMathsProject from './components/ProjectPages/ZooMaths';
@@ -55,6 +56,7 @@ function App() {
     <Router basename="/portfolio">
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/projects/yunqi" element={<YunqiProject />} />
         <Route path="/projects/tuitionify" element={<TuitionifyProject />} />
         <Route path="/projects/vcare" element={<VCareProject />} />
         <Route path="/projects/zoomaths" element={<ZooMathsProject />} />

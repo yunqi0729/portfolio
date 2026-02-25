@@ -95,7 +95,7 @@ export default function ProjectDetail({
                                         <div className="relative w-full rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-black" style={{ paddingBottom: '56.25%' }}>
                                             <img className="absolute top-0 left-0 w-full h-full object-contain" src={image.url} alt={`Screenshot ${index + 1}`} />
                                         </div>
-                                        <p className={`text-sm sm:text-base md:text-md mt-1.5 text-center font-normal italic ${isDarkMode ? 'text-[#C37448]' : 'text-[#3F4E79]'}`}>{image.caption}</p>
+                                        <div className={`text-sm sm:text-base md:text-md mt-1.5 text-center font-normal italic ${isDarkMode ? 'text-[#C37448]' : 'text-[#3F4E79]'}`} dangerouslySetInnerHTML={{ __html: image.caption }} />
                                     </div>
                                 ))}
                             </div>
