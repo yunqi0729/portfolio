@@ -9,6 +9,7 @@ import Education from './components/Education';
 import Experiences from './components/Experiences';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
+import Footer from './components/Footer';
 import TuitionifyProject from './components/ProjectPages/Tuitionify';
 import VCareProject from './components/ProjectPages/VCare';
 import ZooMathsProject from './components/ProjectPages/ZooMaths';
@@ -44,6 +45,7 @@ function HomePage() {
       <Experiences />
       <Projects />
       <Contact />
+      <Footer />
     </>
   );
 }
