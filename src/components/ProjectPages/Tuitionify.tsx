@@ -31,7 +31,7 @@ export default function TuitionifyProject() {
             images={[
                 {
                     url: tuitionifyProblem,
-                    caption: "Problem statements and objective of the project."
+                    caption: "Problem statements and objectives of the project."
                 },
                 {
                     url: tuitionifyPoster,

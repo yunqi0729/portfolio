@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import type { RootState } from '../store';
 import { useNavigate } from 'react-router-dom';
 import tuitionifyMain from '../assets/tuitionify_photos/tuitionify_main.png';
-import vcare from '../assets/fict_utar.jpg';
+import vcareMain from '../assets/vcare_photos/vcare_main.png';
 import zoomaths from '../assets/hand-icon.png';
 
 interface ProjectCard {
@@ -36,7 +36,7 @@ export default function Projects() {
             route: "/projects/tuitionify"
         },
         {
-            image: vcare,
+            image: vcareMain,
             title: "<i>VCare</i>, AI-powered Healthcare Mobile Application",
             subtitle: "Varsity Hackathon Project",
             date: "March 2025",
