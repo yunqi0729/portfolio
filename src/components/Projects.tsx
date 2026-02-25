@@ -46,7 +46,7 @@ export default function Projects() {
         {
             image: zoomathsMain,
             title: "<i>Zoo! Maths</i>, Mathematics Mobile Application for School-Going Children",
-            subtitle: "Mobile Applications Development Assignment",
+            subtitle: "Mobile Applications Development Individual Assignment",
             date: "January 2025",
             stack: "Java, XML, Android Studio, Android SDK",
             route: "/projects/zoomaths"
