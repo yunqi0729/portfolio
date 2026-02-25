@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import type { RootState } from '../store';
 import { useNavigate } from 'react-router-dom';
-import tuitionify from '../assets/mountain_background.jpg';
+import tuitionifyMain from '../assets/tuitionify_photos/tuitionify_main.png';
 import vcare from '../assets/fict_utar.jpg';
 import zoomaths from '../assets/hand-icon.png';
 
@@ -28,7 +28,7 @@ export default function Projects() {
         //     route: "/projects/yunqi"
         // },
         {
-            image: tuitionify,
+            image: tuitionifyMain,
             title: "<i>Tuitionify</i>, Smart Management System for Tuition Centre Operations",
             subtitle: "Final Year Project | 19/50 Shortlisted in FYP Competition",
             date: "January 2025 - October 2025",
