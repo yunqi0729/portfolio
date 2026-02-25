@@ -40,7 +40,7 @@ export default function ProjectDetail({
             <div className="px-6 sm:px-10 md:px-16 lg:px-20 xl:px-28 pt-8">
                 <button className={`flex items-center gap-2 px-4 py-2 font-semibold rounded-lg shadow-lg transition-colors ${isDarkMode ? 'bg-[#D3B694] hover:bg-[#C37448] hover:text-white text-[#9C562F]' : 'bg-[#CFD3DC] hover:bg-[#122448] hover:text-white text-[#122448]'}`} onClick={() => navigate('/', { state: { fromProject: true } })}>
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-                    Back to Home
+                    Back to Projects
                 </button>
             </div>
             <div className="px-6 sm:px-10 md:px-16 lg:px-20 xl:px-28 py-10">

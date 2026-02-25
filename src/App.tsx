@@ -24,12 +24,12 @@ function HomePage() {
     const state = location.state as LocationState;
 
     if (state?.fromProject) {
-      const isSmallScreen = window.innerWidth < 1024;
+      const isSmallScreen = window.innerWidth < 1366;  //1024
       scroller.scrollTo('projects', {
         duration: 0,
         delay: 0,
         smooth: 'easeInOutQuart',
-        offset: isSmallScreen ? 55 : -46
+        offset: isSmallScreen ? 55 : 10
       });
       window.history.replaceState({}, document.title);
     }
