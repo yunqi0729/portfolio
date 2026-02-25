@@ -28,6 +28,9 @@ export default function About() {
                     </div>
                     <div className="hidden lg:block w-px border-l-2 border-dotted border-black self-stretch my-4 mx-2"></div>
                     <div className="flex-1 w-full lg:min-w-0 overflow-hidden">
+                        <p className={`text-lg sm:text-lg md:text-xl leading-relaxed mb-3 ${isDarkMode ? 'text-[#9C562F]' : 'text-[#3F4E79]'}`}>
+                            I am a <span className={`font-bold ${isDarkMode ? 'text-[#3F4E79]' : 'text-[#9C562F]'}`}>fresh graduate</span> in the <span className={`font-bold ${isDarkMode ? 'text-[#3F4E79]' : 'text-[#9C562F]'}`}>Bachelor of Computer Science (Honours)</span> program at <span className={`italic`}>Universiti Tunku Abdul Rahman (UTAR)</span>. As one of the proud recipients of the UTAR Top Achiever 100% Scholarship for both my Degree and Foundation Studies, I look forward to leaving my footprint in the IT industry.
+                        </p>
                         <p className={`text-lg sm:text-lg md:text-xl leading-relaxed mb-6 ${isDarkMode ? 'text-[#9C562F]' : 'text-[#3F4E79]'}`}>
                             A dedicated <span className={`font-bold ${isDarkMode ? 'text-[#3F4E79]' : 'text-[#9C562F]'}`}>Software Engineer</span> with a deep passion for the transformative power of code. I am fascinated by the ability to build complex modules and entire digital worlds from a few lines of logic.
                         </p>
