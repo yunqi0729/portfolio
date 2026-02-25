@@ -9,6 +9,8 @@ import tuitionifyFee from '../../assets/tuitionify_photos/tuitionify_fee.png';
 import tuitionifyComm from '../../assets/tuitionify_photos/tuitionify_comm.png';
 import tuitionifyReport from '../../assets/tuitionify_photos/tuitionify_report.png';
 import tuitionifyFaceReg from '../../assets/tuitionify_photos/tuitionify_facereg.png';
+import tuitionifyFlowChart from '../../assets/tuitionify_photos/tuitionify_flowchart.png';
+import tuitionifyUseCase from '../../assets/tuitionify_photos/tuitionify_usecase.png';
 
 export default function TuitionifyProject() {
     return (
@@ -36,6 +38,14 @@ export default function TuitionifyProject() {
                 {
                     url: tuitionifyPoster,
                     caption: "Poster of the project."
+                },
+                {
+                    url: tuitionifyFlowChart,
+                    caption: "System Flow Chart"
+                },
+                {
+                    url: tuitionifyUseCase,
+                    caption: "Use Case Diagram"
                 },
                 {
                     url: tuitionifyUser,
